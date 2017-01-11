@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <title>Flask Google Maps Full Map Example</title>
+            <link rel="stylesheet" href="">
+            {{fullmap.js}}
+    </head>
+    <body>
+        <h1>Tales of the Traveling Python Salesman</h1>
+        <p>
+          Click on the map to add markers, then click [Get Tour!] to call
+          your TSP solver!
+        </p>
+        <input type="submit" value="Get Tour!" onclick="getOrder(true);" />
+        <input type="submit" value="Clear" onclick="initialize_fullmap();" />
+        {{ fullmap.html }}
+    </body>
+</html>

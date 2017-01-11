@@ -89,7 +89,6 @@ class Graph(object):
             raise ValueError("Edge not found in Adj Matrix")
         else:
             return edge
- 
 
     def __repr__(self):
         name = self.graph_name
@@ -117,8 +116,8 @@ class Graph(object):
 
         fig = plt.figure()
         ax = fig.add_subplot(111)
-        x = [int(node.node_data[0]) for node in self.__nodes]  # liste abscisses
-        y = [int(node.node_data[1]) for node in self.__nodes]  # liste ordonnées
+        x = [int(node.node_data[0]) for node in self.__nodes]  # liste abs
+        y = [int(node.node_data[1]) for node in self.__nodes]  # liste ord
 
         # Plot edges.
         edge_pos = np.asarray([(e.edge_startnode.node_data, e.edge_endnode.node_data
@@ -212,7 +211,7 @@ class Graph(object):
             ens_n = nodes_queue.dequeue()
             n = ens_n.original_node  # n is the corresponding Node object
 
-            # If ens_n has no father : this is first node to be chosen and there
+            # If ens_n has no father: this is first node to be chosen and there
             # is no edge to add to spanning tree
             if not ens_n.is_root():
                 edge_to_add = self.get_edge(n, ens_n.father.original_node)
@@ -247,13 +246,14 @@ class Graph(object):
 
             while not pile.is_empty():
                 u = pile.pop()
-                visited_nodes.append(u)
-                u.visited = True
+                if not u.visited:
+                    visited_nodes.append(u)
+                    u.visited = True
                 for neighbor in self.adj_matrix[u].keys():
                     if not neighbor.visited:
                         pile.push(neighbor)
 
-            self.reset_visited_nodes()  # Reset modifs algorithm made on graph nodes
+            self.reset_visited_nodes()  # Reset modifs made on graph nodes
             return visited_nodes
 
     def rsl(self, root, st_algo):
